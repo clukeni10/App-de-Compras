@@ -15,6 +15,6 @@ btn.addEventListener("click", () => {
       } else{
             alert("Insira todos os dados");
       }
-      window.location.href = "two.html";
+      window.location.href = "produtos.html";
 });
 

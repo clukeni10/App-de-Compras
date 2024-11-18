@@ -1,19 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-ao">
 <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Document</title>
+      <link rel="stylesheet" href="style.css">
       
 </head>
 <body>
-      <h2>nome</h2>
-      <input type="text"  id="nome">
-
-      <h2>valor</h2>
-      <input type="number"  id="valor">
-
-      <button id="btn">enviar</button>
+      <div class="container" id="container">
+            <!-- Ícone ou imagem selecionada -->
+            <div
+              class="icon-container"
+              onclick="document.getElementById('imageInput').click();"
+              id="imageIcon"
+            >
+              📷
+            </div>
+      
+            <!-- Input de imagem oculto -->
+            <input
+              type="file"
+              id="imageInput"
+              accept="image/*"
+            />
+      
+            <div class="inputs">
+              <label for="nome" class="label">NOME</label>
+              <input type="text" name="nome" id="nome" />
+      
+              <label for="valor" class="label">VALOR MONETÁRIO</label>
+              <input type="number" name="valor" id="valor" />
+      
+           
+      
+              <button  id="btn">ADICIONAR</button>
+            </div>
+          </div>
+      
+        <div class="lista" id="Lista">
+            
+        </div>
 
       <script src="script.js"></script>
 
