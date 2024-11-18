@@ -1,0 +1,210 @@
+body {
+  background-color: rgb(210, 222, 233);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.title{
+text-align: center;
+font-weight: bold;
+font-size: 40px;
+color: #007bff;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  
+}
+.product-card {
+  width: 300px; /* Define a largura do card */
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px; /* Bordas arredondadas */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra sutil */
+  overflow: hidden; /* Oculta elementos transbordantes */
+  transition: transform 0.3s ease; /* Animação ao passar o mouse */
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 30px;
+}
+
+.product-card:hover {
+  transform: translateY(-5px); /* Efeito hover para levantar o card */
+}
+
+.product-image img {
+    margin-top: 10px;
+  width: 100%;
+  height: 200px; /* Define a altura fixa da imagem */
+  object-fit: cover; /* Cobre todo o espaço do card */
+}
+
+.product-details {
+  padding: 15px;
+}
+
+.product-title {
+  font-size: 1.2rem;
+  margin: 10px 0;
+  font-weight: bold;
+  color: #333;
+}
+
+.product-description {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 8px 0 12px;
+  line-height: 1.4;
+}
+
+/* Estilo para o preço */
+.product-price {
+  font-size: 1.1rem;
+  color: #007bff; /* Exemplo de cor azul */
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+/* Botão de ação */
+.btnComprar {
+  background-color: #007bff; /* Cor do botão */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btnComprar:hover {
+  background-color: #0056b3; /* Cor mais escura no hover */
+}
+
+.figures{
+  display: flex;
+  justify-content: space-evenly;
+  width: 200px;
+  position: absolute;
+  top: 40px;
+  right: 100px;
+}
+#carrinho{
+
+  padding: 10px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s;
+
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+  
+
+#user{
+  padding: 10px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s;
+
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+ 
+}
+
+#user:hover{
+  background-color: #1765b8;
+}
+#carrinho:hover{
+  background-color: #1765b8;
+
+}
+
+img{
+  width: 50px;
+}
+
+.modal {
+  display: none; /* Oculto por padrão */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
+  justify-content: center;
+  align-items: center;
+}
+
+/* Conteúdo do modal */
+.modal-content {
+  position: relative;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 80%;
+  max-width: 400px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Botão de fechar (X) */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.label{
+  font-size: 15px;
+      font-weight: bold;
+      color:#007bff;  
+}
+
+input{
+  margin-bottom: 10px;
+      width: 200px;
+      height: 25px;
+      border-radius: 10px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      padding: 5px;
+}
+
+input:focus{
+  outline: none; 
+  border-color: #007bff; 
+  box-shadow: 0 0 2px #007bff; 
+}
+
+#update{
+  background-color: #007bff; /* Cor do botão */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#update:hover{
+    background-color: #0056b3; /* Cor mais escura no hover */
+  }
