@@ -1,87 +1,105 @@
-*{
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-body{
+body {
     background-color: rgb(210, 222, 233);
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-h2{
+h2 {
     text-align: center;
     font-size: 30px;
     color: #007bff;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-   
+    padding-bottom: 5px;
 }
 
-.item{
-    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+#carrinho {
     display: flex;
-    justify-content: space-between;
-    padding: 5px;
-    background-color: white;
-    cursor: pointer;
-    margin: 6px;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
-
-#listaProdutos{
+#listaProdutos {
     background-color: white;
-    width: 500px;
-    height: 500px;
-    padding: 10px;
+    padding: 20px;
     border: 1px solid rgba(0, 0, 0, 0.5);
     border-radius: 10px;
-    box-shadow: 0px 4px 8px black;
-
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
 
     display: flex;
     flex-direction: column;
+    gap: 15px;
 
-    margin-top: 40px;
-    
+    width: 90%;
+    max-width: 500px; /* Limita o tamanho máximo do container */
+    height: auto; /* Ajusta dinamicamente a altura */
+    overflow-y: auto; /* Adiciona rolagem se necessário */
 }
 
-.remover{
-    background-color: #FF4040 ;
+.item {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    gap: 10px;
+}
+
+.remover {
+    background-color: #FF4040;
     color: white;
     padding: 8px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.remover:hover{
+.remover:hover {
     background-color: #d44040;
 }
 
-#finalizarCompra{
-    position: absolute;
-    bottom: 10px;
-    background-color:#007bff;
-    width: 96%;
+#finalizarCompra {
+    margin-top: 20px;
+    background-color: #007bff;
+    width: 100%;
     padding: 10px;
     border: none;
     border-radius: 5px;
     font-size: 18px;
     color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-#back{
+#finalizarCompra:hover {
+    background-color: #0056b3;
+}
+
+#back {
     width: 90px;
-    padding: 5px;
+    padding: 8px;
     border: 1px solid rgba(0, 0, 0, 0.3);
     border-radius: 5px;
     background-color: azure;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-#back:hover{
+#back:hover {
     background-color: rgb(217, 224, 224);
+}
+
+p {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
 }

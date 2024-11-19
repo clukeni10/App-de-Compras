@@ -1,37 +1,48 @@
- // Seleciona todos os botões de compra
- document.querySelectorAll('.btnComprar').forEach(button => {
+//produtos.js
+
+// Seleciona todos os botões de compra
+document.querySelectorAll('.btnComprar').forEach(button => {
   button.addEventListener('click', function () {
     let produto = this.closest('.product-card'); // Encontra o produto relacionado ao botão clicado
 
-    // Obtem informações do produto
+    // Obtém informações do produto
     let productId = produto.getAttribute('data-id');
     let productName = produto.getAttribute('data-nome');
     let productPrice = parseFloat(produto.getAttribute('data-preco'));
 
-    // Recupera o carrinho atual do localStorage ou inicializa um novo array
-    let carrinho = JSON.parse(localStorage.getItem('Carrinho')) || [];
+    // Recupera o registro do usuário atual
+    let Registros = JSON.parse(localStorage.getItem('Registros')) || [];
+    let ultimoRegistro = Registros.length > 0 ? Registros[Registros.length - 1] : null;
 
-    // Adiciona o produto ao carrinho
-    carrinho.push({
-      id: productId,
-      nome: productName,
-      preco: productPrice,
-    });
+    if (ultimoRegistro) {
+      // Recupera ou inicializa os carrinhos por usuário
+      let CarrinhosPorUsuario = JSON.parse(localStorage.getItem('CarrinhosPorUsuario')) || {};
+      let carrinho = CarrinhosPorUsuario[ultimoRegistro.nome] || [];
 
-    // Atualiza o carrinho no localStorage
-    localStorage.setItem('Carrinho', JSON.stringify(carrinho));
+      // Adiciona o produto ao carrinho do usuário
+      carrinho.push({
+        id: productId,
+        nome: productName,
+        preco: productPrice,
+      });
 
-    alert(`${productName} foi adicionado ao carrinho!`);
+      // Atualiza o carrinho do usuário no localStorage
+      CarrinhosPorUsuario[ultimoRegistro.nome] = carrinho;
+      localStorage.setItem('CarrinhosPorUsuario', JSON.stringify(CarrinhosPorUsuario));
+
+      alert(`${productName} foi adicionado ao carrinho!`);
+    } else {
+      alert('Por favor, registre um usuário antes de adicionar itens ao carrinho.');
+    }
   });
 });
 
+// Redireciona para a página do carrinho
 document.getElementById('carrinho').addEventListener('click', () => {
-
   window.location.href = "carrinho.html";
 });
 
-
-// Seleciona os elementos
+// Modal
 const openModal = document.getElementById('user');
 const modal = document.getElementById('modal');
 const closeModal = document.querySelector('.close');
@@ -65,7 +76,6 @@ openModal.addEventListener('click', () => {
   }
 });
 
-// Botão de atualização
 let updateButton = document.getElementById('update');
 if (updateButton) {
   updateButton.addEventListener('click', () => {
@@ -75,26 +85,28 @@ if (updateButton) {
     // Recupera os registros do localStorage
     let Registros = JSON.parse(localStorage.getItem('Registros')) || [];
 
-    // Verifica se existem registros e atualiza o último registro
     if (Registros.length > 0) {
+      // Atualiza o último registro existente
       let ultimoRegistro = Registros[Registros.length - 1];
-
-      // Atualiza os dados do último registro
       ultimoRegistro.nome = nomeUser;
       ultimoRegistro.valor = valorUser;
-
-      // Salva novamente no localStorage
-      localStorage.setItem('Registros', JSON.stringify(Registros));
-
-      // Exibe um alert informando que os dados foram atualizados
       alert('Os dados foram atualizados com sucesso!');
-      modal.style.display = 'none'; // Fecha o modal após a atualização
     } else {
-      console.log('Não há registros para atualizar.');
+      // Cria um novo registro se não existir nenhum
+      let novoRegistro = { nome: nomeUser, valor: parseFloat(valorUser) || 0 };
+      Registros.push(novoRegistro);
+      alert('Novo registro criado com sucesso!');
+    }
+
+    // Salva os registros atualizados no localStorage
+    localStorage.setItem('Registros', JSON.stringify(Registros));
+
+    // Fecha o modal (caso exista)
+    if (typeof modal !== 'undefined' && modal) {
+      modal.style.display = 'none';
     }
   });
 }
-
 
 // Fecha o modal ao clicar no botão de fechar
 closeModal.addEventListener('click', () => {
@@ -108,3 +120,10 @@ window.addEventListener('click', (event) => {
   }
 });
 
+document.getElementById('registrarUser').addEventListener('click', () => {
+  window.location.href = 'index.html';
+});
+
+document.getElementById('lista').addEventListener('click', () => { 
+  window.location.href = 'listando.html';
+});
