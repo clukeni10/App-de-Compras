@@ -17,7 +17,11 @@ btn?.addEventListener("click", () => {
     const imagem = localStorage.getItem("imagem");
 
     // Salvar os dados (nome, valor e imagem) no localStorage
-    Registros.push({ nome, valor, imagem });
+    Registros.push({ 
+      nome: nome ?? "", 
+      valor: valor ?? "", 
+      imagem: imagem ?? "" 
+  });
 
     localStorage.setItem("Registros", JSON.stringify(Registros));
     alert("Dados salvos com sucesso.");
