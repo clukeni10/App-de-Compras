@@ -48,4 +48,4 @@ window.addEventListener('dadosAtualizados', atualizarLista);
 
 document.getElementById('back').addEventListener('click', () => { 
   window.location.href = 'produtos.html';
-});
+}); 

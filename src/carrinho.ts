@@ -18,7 +18,7 @@ interface CompraFinalizada {
 }
 
 // Recupera os registros do localStorage
-let Registros1: Registro[] = JSON.parse(localStorage.getItem('1') || '[]');
+let Registros1: Registro[] = JSON.parse(localStorage.getItem('Registros') || '[]');
 let ultimoRegistro: Registro | null = Registros1.length > 0 ? Registros1[Registros1.length - 1] : null;
 
 // Recupera o carrinho atual do localStorage para o usuário atual
