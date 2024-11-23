@@ -1,25 +1,8 @@
 // Interfaces para tipagem
-interface Produto {
-  nome: string;
-  preco: number;
-}
 
-interface Registro {
-  nome: string;
-  valor: number;
-  imagem?: string;
-}
+import{ Registros, CarrinhosPorUsuario, ComprasFinalizadas} from "./DAO/ListandoDAO"
 
-interface CompraFinalizada {
-  nome: string;
-  produtos: Produto[];
-  data: string;
-}
 
-// Recupera os registros de usuários, carrinhos e compras finalizadas
-let Registros: Registro[] = JSON.parse(localStorage.getItem('Registros') || '[]');
-let CarrinhosPorUsuario: Record<string, Produto[]> = JSON.parse(localStorage.getItem('CarrinhosPorUsuario') || '{}');
-let ComprasFinalizadas: CompraFinalizada[] = JSON.parse(localStorage.getItem('ComprasFinalizadas') || '[]');
 
 // Elemento onde as compras serão listadas
 const listaCompras = document.getElementById('listaCompras') as HTMLElement;

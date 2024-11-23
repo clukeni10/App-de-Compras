@@ -1,8 +1,5 @@
-"use strict";
-// Recupera os registros de usuários, carrinhos e compras finalizadas
-let Registros = JSON.parse(localStorage.getItem('Registros') || '[]');
-let CarrinhosPorUsuario = JSON.parse(localStorage.getItem('CarrinhosPorUsuario') || '{}');
-let ComprasFinalizadas = JSON.parse(localStorage.getItem('ComprasFinalizadas') || '[]');
+// Interfaces para tipagem
+import { Registros, ComprasFinalizadas } from "./DAO/ListandoDAO";
 // Elemento onde as compras serão listadas
 const listaCompras = document.getElementById('listaCompras');
 // Função para exibir as compras

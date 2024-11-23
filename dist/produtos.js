@@ -1,4 +1,3 @@
-"use strict";
 var _a, _b, _c;
 // Adiciona evento aos botões de compra
 document.querySelectorAll('.btnComprar').forEach(button => {
@@ -100,3 +99,4 @@ window.addEventListener('click', event => {
 (_c = document.getElementById('lista')) === null || _c === void 0 ? void 0 : _c.addEventListener('click', () => {
     window.location.href = 'listando.html';
 });
+export {};

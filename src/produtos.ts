@@ -1,14 +1,6 @@
 // Interfaces para tipagem
-interface Produto {
-  id?: string;
-  nome: string;
-  preco: number;
-}
+import { Produto, Registro } from "./DAO/Interfaces.ts";
 
-interface Registro {
-  nome: string;
-  valor: number;
-}
 
 // Adiciona evento aos botões de compra
 document.querySelectorAll<HTMLButtonElement>('.btnComprar').forEach(button => {

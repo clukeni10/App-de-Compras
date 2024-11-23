@@ -1,30 +1,7 @@
+import { Produto, CompraFinalizada, ItemCarrinho, CarrinhosPorUsuario, Registro } from "./DAO/Interfaces.ts";
+import {Registros1, ultimoRegistro, CarrinhosPorUsuario1, carrinho, finalizarCompra} from "./DAO/CarrinhoDAO.ts"
 
-// carrinho.ts
 
-// Interfaces para tipagem
-interface Produto {
-  nome: string;
-  preco: number;
-}
-
-interface Registro {
-  nome: string;
-  valor: number;
-}
-
-interface CompraFinalizada {
-  nome: string;
-  produtos: Produto[];
-  data: string;
-}
-
-// Recupera os registros do localStorage
-let Registros1: Registro[] = JSON.parse(localStorage.getItem('Registros') || '[]');
-let ultimoRegistro: Registro | null = Registros1.length > 0 ? Registros1[Registros1.length - 1] : null;
-
-// Recupera o carrinho atual do localStorage para o usuário atual
-let CarrinhosPorUsuario1: Record<string, Produto[]> = JSON.parse(localStorage.getItem('CarrinhosPorUsuario') || '{}');
-let carrinho: Produto[] = ultimoRegistro ? CarrinhosPorUsuario1[ultimoRegistro.nome] || [] : [];
 
 // Elemento onde os produtos serão listados
 const listaProdutos = document.getElementById('listaProdutos') as HTMLElement;
@@ -38,7 +15,8 @@ if (finalizarCompraBtn) {
 }
 
 // Preenche o carrinho com os itens do localStorage
-function carregarCarrinho(): void {
+
+export function carregarCarrinho(): void {
   console.log(carrinho);
   itensContainer.innerHTML = ""; // Limpa os itens anteriores
 
@@ -51,8 +29,9 @@ function carregarCarrinho(): void {
   }
 }
 
+
 // Adiciona um novo item no carrinho
-function adicionarItem(produto: Produto, index: number): void {
+export function adicionarItem(produto: Produto, index: number): void {
   const item = document.createElement('div');
   item.className = 'item';
   item.innerHTML = `
@@ -67,7 +46,7 @@ function adicionarItem(produto: Produto, index: number): void {
 }
 
 // Remove um item do carrinho
-function removerItem(index: number): void {
+export function removerItem(index: number): void {
   carrinho.splice(index, 1); // Remove o item do array
   if (ultimoRegistro) {
     CarrinhosPorUsuario1[ultimoRegistro.nome] = carrinho; // Atualiza o carrinho do usuário
@@ -76,47 +55,55 @@ function removerItem(index: number): void {
   carregarCarrinho(); // Atualiza a interface dinamicamente
 }
 
-// Finalizar Compra
-finalizarCompraBtn?.addEventListener('click', () => {
+/// Função para calcular o total do carrinho
+function calcularTotalCarrinho(carrinho: ItemCarrinho[]): number {
+  return carrinho.reduce((total, item) => total + item.preco, 0);
+}
+
+
+function handleFinalizarCompra(): void {
+  // Carrega os registros e o último usuário
+  const Registros1: Registro[] = JSON.parse(localStorage.getItem('Registros') || '[]');
+  const ultimoRegistro = Registros1[Registros1.length - 1];
+
   if (!ultimoRegistro) {
-    alert('Erro: Nenhum registro de usuário encontrado.');
+    alert('Nenhum usuário encontrado.');
     return;
   }
 
-  const valorUser = parseFloat(ultimoRegistro.valor.toString());
-  const totalCarrinho = carrinho.reduce((total, produto) => total + produto.preco, 0);
+  // Carrega os carrinhos
+  const CarrinhosPorUsuario1: CarrinhosPorUsuario = JSON.parse(
+    localStorage.getItem('CarrinhosPorUsuario') || '{}'
+  );
+  const carrinho = CarrinhosPorUsuario1[ultimoRegistro.nome] || [];
 
-  if (valorUser >= totalCarrinho) {
-    // Atualiza o saldo do usuário
-    ultimoRegistro.valor = valorUser - totalCarrinho;
-    Registros1[Registros1.length - 1] = ultimoRegistro;
-    localStorage.setItem('Registros', JSON.stringify(Registros1));
-
-    // Salva os produtos finalizados no localStorage
-    const ComprasFinalizadas: CompraFinalizada[] = JSON.parse(localStorage.getItem('ComprasFinalizadas') || '[]');
-    ComprasFinalizadas.push({
-      nome: ultimoRegistro.nome,
-      produtos: carrinho, // Itens comprados
-      data: new Date().toLocaleString(), // Adiciona a data da compra
-    });
-    localStorage.setItem('ComprasFinalizadas', JSON.stringify(ComprasFinalizadas));
-
-    // Esvazia o carrinho atual
-    CarrinhosPorUsuario1[ultimoRegistro.nome] = [];
-    localStorage.setItem('CarrinhosPorUsuario', JSON.stringify(CarrinhosPorUsuario1));
-
-    // Dispara um evento para notificar outras páginas
-    const evento = new Event('dadosAtualizados');
-    window.dispatchEvent(evento);
-
-    alert(`Compra realizada com sucesso! Seu novo saldo é de KZ ${ultimoRegistro.valor.toFixed(2)}`);
-
-    // Atualiza a interface
-    carregarCarrinho();
-  } else {
-    alert('Saldo insuficiente para finalizar a compra.');
+  if (carrinho.length === 0) {
+    alert('O carrinho está vazio.');
+    return;
   }
-});
+
+  // Calcula o total do carrinho
+  const totalCarrinho = calcularTotalCarrinho(carrinho);
+
+  // Obtém o saldo do usuário
+  const valorUser = ultimoRegistro.valor;
+
+  // Chama a função de finalização da compra
+  finalizarCompra({
+    valorUser,
+    totalCarrinho,
+    ultimoRegistro,
+    Registros1,
+    CarrinhosPorUsuario1,
+    carrinho,
+  });
+}
+
+// Adiciona o evento de clique ao botão
+const btnFinalizarCompra = document.getElementById('finalizarCompra');
+if (btnFinalizarCompra) {
+  btnFinalizarCompra.addEventListener('click', handleFinalizarCompra);
+}
 
 // Inicializa o carrinho ao carregar a página
 carregarCarrinho();
