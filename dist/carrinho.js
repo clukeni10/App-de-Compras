@@ -26,7 +26,6 @@ itensContainer.addEventListener('click', (event) => {
 finalizarCompraBtn === null || finalizarCompraBtn === void 0 ? void 0 : finalizarCompraBtn.addEventListener('click', () => {
     handleFinalizarCompra(); // Finaliza a compra e atualiza o carrinho
 });
-// Função para calcular e exibir o total do carrinho
 // Adiciona o evento de clique ao botão
 const btnFinalizarCompra = document.getElementById('finalizarCompra');
 if (btnFinalizarCompra) {

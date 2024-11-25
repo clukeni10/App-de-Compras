@@ -40,6 +40,7 @@ export interface CarrinhosPorUsuario {
 
 export interface FinalizarCompraParams {
   valorUser: number; // Saldo do usuário
+  totalCarrinho: number; // Total do carrinho
   ultimoRegistro: Registro; // Registro do usuário
   Registros1: Registro[]; // Lista de registros
   CarrinhosPorUsuario1: CarrinhosPorUsuario; // Carrinhos por usuário

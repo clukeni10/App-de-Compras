@@ -1,8 +1,6 @@
 // Importa as funções do carrinhoRepository
 import {
-  finalizarCompra,
   carregarCarrinho,
-  adicionarItem,
   removerItem,
   handleFinalizarCompra,
 } from './Repository/CarrinhoRepository';
@@ -40,12 +38,6 @@ itensContainer.addEventListener('click', (event) => {
 finalizarCompraBtn?.addEventListener('click', () => {
   handleFinalizarCompra();  // Finaliza a compra e atualiza o carrinho
 });
-
-// Função para calcular e exibir o total do carrinho
-
-
-
-
 
 
 // Adiciona o evento de clique ao botão

@@ -6,14 +6,15 @@ import { carrinho, itensContainer, ultimoRegistro, CarrinhosPorUsuario1 } from "
 
 export function finalizarCompra({
     valorUser,
+    totalCarrinho,
     ultimoRegistro,
     Registros1,
     CarrinhosPorUsuario1,
     carrinho,
   }: FinalizarCompraParams): void {
-    if (valorUser ) {
+    if (valorUser >= totalCarrinho) {
       // Atualiza o saldo do usuário
-      ultimoRegistro.valor = valorUser;
+      ultimoRegistro.valor = valorUser - totalCarrinho;
       Registros1[Registros1.length - 1] = ultimoRegistro;
       localStorage.setItem('Registros', JSON.stringify(Registros1));
   
@@ -87,7 +88,9 @@ export function finalizarCompra({
     carregarCarrinho(); // Atualiza a interface dinamicamente
   }
 
- 
+ export  function calcularTotalCarrinho(carrinho1: ItemCarrinho[]): number {
+    return carrinho.reduce((total, item) => total + item.preco, 0);
+  }
 
 
  export  function handleFinalizarCompra(): void {
@@ -112,7 +115,7 @@ export function finalizarCompra({
     }
   
     // Calcula o total do carrinho
-
+    const totalCarrinho = calcularTotalCarrinho(carrinho);
   
     // Obtém o saldo do usuário
     const valorUser = ultimoRegistro.valor;
@@ -120,6 +123,7 @@ export function finalizarCompra({
     // Chama a função de finalização da compra
     finalizarCompra({
       valorUser,
+      totalCarrinho,
       ultimoRegistro,
       Registros1,
       CarrinhosPorUsuario1,

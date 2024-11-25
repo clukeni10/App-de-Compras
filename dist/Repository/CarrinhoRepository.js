@@ -1,8 +1,8 @@
 import { carrinho, itensContainer, ultimoRegistro, CarrinhosPorUsuario1 } from "../DAO/CarrinhoDAO.js";
-export function finalizarCompra({ valorUser, ultimoRegistro, Registros1, CarrinhosPorUsuario1, carrinho, }) {
-    if (valorUser) {
+export function finalizarCompra({ valorUser, totalCarrinho, ultimoRegistro, Registros1, CarrinhosPorUsuario1, carrinho, }) {
+    if (valorUser >= totalCarrinho) {
         // Atualiza o saldo do usuário
-        ultimoRegistro.valor = valorUser;
+        ultimoRegistro.valor = valorUser - totalCarrinho;
         Registros1[Registros1.length - 1] = ultimoRegistro;
         localStorage.setItem('Registros', JSON.stringify(Registros1));
         // Salva os produtos finalizados no localStorage
@@ -61,6 +61,9 @@ export function removerItem(index) {
     }
     carregarCarrinho(); // Atualiza a interface dinamicamente
 }
+export function calcularTotalCarrinho(carrinho1) {
+    return carrinho.reduce((total, item) => total + item.preco, 0);
+}
 export function handleFinalizarCompra() {
     // Carrega os registros e o último usuário
     const Registros1 = JSON.parse(localStorage.getItem('Registros') || '[]');
@@ -77,11 +80,13 @@ export function handleFinalizarCompra() {
         return;
     }
     // Calcula o total do carrinho
+    const totalCarrinho = calcularTotalCarrinho(carrinho);
     // Obtém o saldo do usuário
     const valorUser = ultimoRegistro.valor;
     // Chama a função de finalização da compra
     finalizarCompra({
         valorUser,
+        totalCarrinho,
         ultimoRegistro,
         Registros1,
         CarrinhosPorUsuario1,
