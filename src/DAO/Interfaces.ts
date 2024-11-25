@@ -10,7 +10,7 @@ export interface Produto {
       nome: string;
       valor: number;
       imagem?: string;
-    }
+    } 
     
     export interface CompraFinalizada {
       nome: string;

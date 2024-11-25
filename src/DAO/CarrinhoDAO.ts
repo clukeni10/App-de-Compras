@@ -18,7 +18,7 @@ itensContainer.id = 'itensContainer';
 export const finalizarCompraBtn = document.getElementById('finalizarCompra');
 if (finalizarCompraBtn) {
   listaProdutos.insertBefore(itensContainer, finalizarCompraBtn);
-}
+} 
 
 
 export function finalizarCompra({
