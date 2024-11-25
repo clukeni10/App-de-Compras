@@ -110,7 +110,7 @@ window.addEventListener('click', event => {
   if (event.target === modal) {
     if (modal) {
       modal.style.display = 'none';
-    }
+    } 
   }
 });
 

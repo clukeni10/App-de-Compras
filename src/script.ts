@@ -1,3 +1,5 @@
+import { Registro } from "./Interfaces";
+
 // Tipagem dos elementos
 const btn = document.getElementById("btn") as HTMLButtonElement | null;
 const imageInput = document.getElementById("imageInput") as HTMLInputElement | null;
@@ -5,23 +7,23 @@ const imageIcon = document.getElementById("imageIcon") as HTMLElement | null;
 
 btn?.addEventListener("click", () => {
   const nome = (document.getElementById("nome") as HTMLInputElement)?.value;
-  const valor = (document.getElementById("valor") as HTMLInputElement)?.value;
+  const valor = Number(document.getElementById("valor") as HTMLInputElement);
 
   if (nome && valor) {
     // Recupera os registros do localStorage ou inicializa como um array vazio
-    let Registros: { nome: string; valor: string; imagem?: string }[] = JSON.parse(
+    let Registros: Registro[]  = JSON.parse(
       localStorage.getItem("Registros") || "[]"
     );
 
     // Recuperar a imagem armazenada no localStorage, se houver
     const imagem = localStorage.getItem("imagem");
-
+ 
     // Salvar os dados (nome, valor e imagem) no localStorage
-    Registros.push({ 
-      nome: nome ?? "", 
-      valor: valor ?? "", 
-      imagem: imagem ?? "" 
-  });
+    Registros.push({
+      nome: nome ?? "", // Mantém a string como padrão
+      valor: isNaN(valor) ? 0 : valor,
+      imagem: imagem ?? "" // Mantém a string vazia como padrão
+    });
 
     localStorage.setItem("Registros", JSON.stringify(Registros));
     alert("Dados salvos com sucesso.");
