@@ -1,5 +1,5 @@
 // Interfaces para tipagem
-import { Produto, Registro } from "./DAO/Interfaces.ts";
+import { Produto, Registro } from "./Interfaces";
 
 
 // Adiciona evento aos botões de compra

@@ -1,48 +1,38 @@
 <!DOCTYPE html>
 <html lang="pt-ao">
-<head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Registre-se</title>
-      <link rel="stylesheet" href="css/style.css">
-      
-</head>
-<body>
-      <div class="container" id="container">
-            <!-- Ícone ou imagem selecionada -->
-            <div
-              class="icon-container"
-              onclick="document.getElementById('imageInput').click();"
-              id="imageIcon"
-            >
-              📷
-            </div> 
-      
-            <!-- Input de imagem oculto -->
-            <input
-              type="file" 
-              id="imageInput"
-              accept="image/*"
-            />
-      
-            <div class="inputs">
-              <label for="nome" class="label">NOME</label>
-              <input type="text" name="nome" id="nome" />
-      
-              <label for="valor" class="label">VALOR MONETÁRIO</label>
-              <input type="number" name="valor" id="valor" />
-      
-           
-      
-              <button  id="btn">ADICIONAR</button>
-            </div>
-          </div>
-      
-        <div class="lista" id="Lista">
-            
-        </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registre-se</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="container" id="container">
+      <!-- Ícone ou imagem selecionada -->
+      <div
+        class="icon-container"
+        onclick="document.getElementById('imageInput').click();"
+        id="imageIcon"
+      >
+        📷
+      </div>
 
-      <script type="module" src="dist/script.js"></script>
+      <!-- Input de imagem oculto -->
+      <input type="file" id="imageInput" accept="image/*" />
 
-</body>
+      <div class="inputs">
+        <label for="nome" class="label">NOME</label>
+        <input type="text" name="nome" id="nome" />
+
+        <label for="valor" class="label">VALOR MONETÁRIO</label>
+        <input type="number" name="valor" id="valor" />
+
+        <button id="btn">ADICIONAR</button>
+      </div>
+    </div>
+
+    <div class="lista" id="Lista"></div>
+
+    <script type="module" src="dist/script.js"></script>
+  </body>
 </html>

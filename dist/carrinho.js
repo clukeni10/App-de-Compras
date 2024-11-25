@@ -1,4 +1,5 @@
-import { ultimoRegistro, CarrinhosPorUsuario1, carrinho, finalizarCompra } from "./DAO/CarrinhoDAO.js";
+// Importa as funções do carrinhoRepository
+import { carregarCarrinho, removerItem, handleFinalizarCompra, } from './Repository/CarrinhoRepository.js';
 // Elemento onde os produtos serão listados
 const listaProdutos = document.getElementById('listaProdutos');
 // Cria um container para os itens dinamicamente
@@ -8,74 +9,24 @@ const finalizarCompraBtn = document.getElementById('finalizarCompra');
 if (finalizarCompraBtn) {
     listaProdutos.insertBefore(itensContainer, finalizarCompraBtn);
 }
-// Preenche o carrinho com os itens do localStorage
-export function carregarCarrinho() {
-    console.log(carrinho);
-    itensContainer.innerHTML = ""; // Limpa os itens anteriores
-    if (carrinho.length > 0) {
-        carrinho.forEach((produto, index) => {
-            adicionarItem(produto, index);
-        });
+// Função para carregar o carrinho ao carregar a página
+window.addEventListener('load', () => {
+    carregarCarrinho(); // Carrega os itens do carrinho para o DOM
+});
+// Função para adicionar um item ao carrinho
+// Função para remover um item do carrinho
+itensContainer.addEventListener('click', (event) => {
+    if (event.target.classList.contains('remover')) {
+        const index = Number(event.target.getAttribute('data-index'));
+        removerItem(index); // Remove o item do carrinho
+        // Atualiza o total do carrinho após remoção
     }
-    else {
-        itensContainer.innerHTML = '<p>Seu carrinho está vazio.</p>';
-    }
-}
-// Adiciona um novo item no carrinho
-export function adicionarItem(produto, index) {
-    const item = document.createElement('div');
-    item.className = 'item';
-    item.innerHTML = `
-        <p>${produto.nome} - KZ ${produto.preco.toFixed(2)}</p>
-        <button class="remover" data-index="${index}">Remover</button>
-      `;
-    itensContainer.appendChild(item);
-    // Evento do botão de remoção
-    const removerBtn = item.querySelector('.remover');
-    removerBtn.addEventListener('click', () => removerItem(index));
-}
-// Remove um item do carrinho
-export function removerItem(index) {
-    carrinho.splice(index, 1); // Remove o item do array
-    if (ultimoRegistro) {
-        CarrinhosPorUsuario1[ultimoRegistro.nome] = carrinho; // Atualiza o carrinho do usuário
-        localStorage.setItem('CarrinhosPorUsuario', JSON.stringify(CarrinhosPorUsuario1)); // Atualiza o localStorage
-    }
-    carregarCarrinho(); // Atualiza a interface dinamicamente
-}
-/// Função para calcular o total do carrinho
-function calcularTotalCarrinho(carrinho) {
-    return carrinho.reduce((total, item) => total + item.preco, 0);
-}
-function handleFinalizarCompra() {
-    // Carrega os registros e o último usuário
-    const Registros1 = JSON.parse(localStorage.getItem('Registros') || '[]');
-    const ultimoRegistro = Registros1[Registros1.length - 1];
-    if (!ultimoRegistro) {
-        alert('Nenhum usuário encontrado.');
-        return;
-    }
-    // Carrega os carrinhos
-    const CarrinhosPorUsuario1 = JSON.parse(localStorage.getItem('CarrinhosPorUsuario') || '{}');
-    const carrinho = CarrinhosPorUsuario1[ultimoRegistro.nome] || [];
-    if (carrinho.length === 0) {
-        alert('O carrinho está vazio.');
-        return;
-    }
-    // Calcula o total do carrinho
-    const totalCarrinho = calcularTotalCarrinho(carrinho);
-    // Obtém o saldo do usuário
-    const valorUser = ultimoRegistro.valor;
-    // Chama a função de finalização da compra
-    finalizarCompra({
-        valorUser,
-        totalCarrinho,
-        ultimoRegistro,
-        Registros1,
-        CarrinhosPorUsuario1,
-        carrinho,
-    });
-}
+});
+// Função para finalizar a compra
+finalizarCompraBtn === null || finalizarCompraBtn === void 0 ? void 0 : finalizarCompraBtn.addEventListener('click', () => {
+    handleFinalizarCompra(); // Finaliza a compra e atualiza o carrinho
+});
+// Função para calcular e exibir o total do carrinho
 // Adiciona o evento de clique ao botão
 const btnFinalizarCompra = document.getElementById('finalizarCompra');
 if (btnFinalizarCompra) {
