@@ -1,11 +1,11 @@
 // Importa as funções do carrinhoRepository
-import { carregarCarrinho, removerItem, handleFinalizarCompra, } from './Repository/CarrinhoRepository.js';
+import { carregarCarrinho, removerItem, handleFinalizarCompra, } from './Repository/CarrinhoRepository';
 // Elemento onde os produtos serão listados
-const listaProdutos = document.getElementById('listaProdutos');
+export const listaProdutos = document.getElementById('listaProdutos');
 // Cria um container para os itens dinamicamente
-const itensContainer = document.createElement('div');
+export const itensContainer = document.createElement('div');
 itensContainer.id = 'itensContainer';
-const finalizarCompraBtn = document.getElementById('finalizarCompra');
+export const finalizarCompraBtn = document.getElementById('finalizarCompra');
 if (finalizarCompraBtn) {
     listaProdutos.insertBefore(itensContainer, finalizarCompraBtn);
 }

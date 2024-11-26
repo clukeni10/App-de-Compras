@@ -1,5 +1,6 @@
 import { FinalizarCompraParams, Produto, ItemCarrinho, Registro, CarrinhosPorUsuario  } from "../Interfaces";
-import { carrinho, itensContainer, ultimoRegistro, CarrinhosPorUsuario1 } from "../DAO/CarrinhoDAO";
+import { carrinho,  ultimoRegistro, CarrinhosPorUsuario1 } from "../DAO/CarrinhoDAO";
+import { itensContainer } from "../carrinho";
 
 
 
@@ -7,7 +8,7 @@ import { carrinho, itensContainer, ultimoRegistro, CarrinhosPorUsuario1 } from "
 export function finalizarCompra({
     valorUser,
     totalCarrinho,
-    ultimoRegistro,
+    ultimoRegistro, 
     Registros1,
     CarrinhosPorUsuario1,
     carrinho,

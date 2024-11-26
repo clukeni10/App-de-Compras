@@ -1,4 +1,5 @@
-import { carrinho, itensContainer, ultimoRegistro, CarrinhosPorUsuario1 } from "../DAO/CarrinhoDAO.js";
+import { carrinho, ultimoRegistro, CarrinhosPorUsuario1 } from "../DAO/CarrinhoDAO";
+import { itensContainer } from "../carrinho";
 export function finalizarCompra({ valorUser, totalCarrinho, ultimoRegistro, Registros1, CarrinhosPorUsuario1, carrinho, }) {
     if (valorUser >= totalCarrinho) {
         // Atualiza o saldo do usuário

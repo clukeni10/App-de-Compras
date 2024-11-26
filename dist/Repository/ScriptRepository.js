@@ -1,5 +1,5 @@
-import { imageIcon } from "../script.js";
-import { SaveImage } from "../DAO/ScriptDAO.js";
+import { imageIcon } from "../User";
+import { saveImage } from "../DAO/UserDAO";
 // Lidar com a seleção da imagem
 export function IconChange(imageInput) {
     imageInput.addEventListener("change", function () {
@@ -12,7 +12,7 @@ export function IconChange(imageInput) {
             reader.onload = function (e) {
                 var _a;
                 const imageBase64 = (_a = e.target) === null || _a === void 0 ? void 0 : _a.result;
-                SaveImage(imageBase64, imageIcon);
+                saveImage(imageBase64);
                 // Substituir o ícone pela imagem selecionada
                 imageIcon.innerHTML = `<img src="${imageBase64}" alt="Imagem Selecionada" style="width: 100%; height: auto;"/>`;
             };

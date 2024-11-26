@@ -1,10 +1,10 @@
-import { saveDados } from "./DAO/ScriptDAO";
+import { saveDados } from "./DAO/UserDAO";
 import { IconChange } from "./Repository/ScriptRepository";
 
 // Tipagem dos elementos
 const btn = document.getElementById("btn") as HTMLButtonElement | null;
 export const imageInput = document.getElementById("imageInput") as HTMLInputElement | null;
-export const imageIcon = document.getElementById("imageIcon") as HTMLElement ;
+export const imageIcon = document.getElementById("imageIcon") as HTMLElement;
 
 
 
@@ -17,11 +17,20 @@ export function getValor(): number {
 }
 
 
-btn?.addEventListener("click", saveDados);
+btn?.addEventListener("click", () => {
+  const sucesso = saveDados();
+  
+  if (sucesso) {
+    window.location.href = "produtos.html"; // Redireciona apenas se os dados forem salvos com sucesso
+  }
+});
+
+
 
 
 // Verifica se o elemento existe antes de passar para a função
 if (imageInput) {
-    IconChange(imageInput);
+  IconChange(imageInput);
 }
 
+ 
