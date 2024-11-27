@@ -22,6 +22,8 @@ btn?.addEventListener("click", () => {
   
   if (sucesso) {
     window.location.href = "produtos.html"; // Redireciona apenas se os dados forem salvos com sucesso
+  } else{
+    alert("Erro, os dados não foram salvos!");
   }
 });
 

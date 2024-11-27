@@ -1,6 +1,7 @@
 // carrinho.ts
 import { atualizarLista } from "./View/ListandoView";
 
+
 // Elemento onde as compras serão listadas
 export const listaCompras = document.getElementById('listaCompras') as HTMLElement | null;
 
@@ -17,3 +18,4 @@ const backButton = document.getElementById('back');
 backButton?.addEventListener('click', () => {
   window.location.href = 'produtos.html';
 });
+

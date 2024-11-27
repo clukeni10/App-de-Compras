@@ -1,5 +1,8 @@
-// Importa as funções do carrinhoRepository
-import {carregarCarrinho,removerItem,handleFinalizarCompra,} from './Repository/CarrinhoRepository';
+
+
+import { carrinho, ultimoRegistro } from './DAO/CarrinhoDAO';
+import { carregarCarrinho, removerItem, handleFinalizarCompra, finalizarCompra, saveShopping } from './Repository/CarrinhoRepository';
+
 
 
 // Elemento onde os produtos serão listados
@@ -18,7 +21,8 @@ window.addEventListener('load', () => {
   carregarCarrinho();  // Carrega os itens do carrinho para o DOM
 });
 
-// Função para adicionar um item ao carrinho
+
+
 
 
 // Função para remover um item do carrinho
@@ -30,17 +34,23 @@ itensContainer.addEventListener('click', (event) => {
   }
 });
 
-// Função para finalizar a compra
-finalizarCompraBtn?.addEventListener('click', () => {
-  handleFinalizarCompra();  // Finaliza a compra e atualiza o carrinho
-});
+
+
 
 
 // Adiciona o evento de clique ao botão
 const btnFinalizarCompra = document.getElementById('finalizarCompra');
 if (btnFinalizarCompra) {
-  btnFinalizarCompra.addEventListener('click', handleFinalizarCompra);
-}
+  btnFinalizarCompra.addEventListener('click', () =>{
+    handleFinalizarCompra();
+    if (ultimoRegistro) {
+      saveShopping(ultimoRegistro, carrinho);
+    } else {
+      console.error('ultimoRegistro is null');
+    }
+    });
+  
+
 
 // Inicializa o carrinho ao carregar a página
 carregarCarrinho();
@@ -49,3 +59,6 @@ const backButton1 = document.getElementById('back');
 backButton1?.addEventListener('click', () => {
   window.location.href = 'produtos.html';
 });
+}
+
+

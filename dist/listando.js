@@ -1,5 +1,5 @@
 // carrinho.ts
-import { atualizarLista } from "./View/ListandoView";
+import { atualizarLista } from "./View/ListandoView.js";
 // Elemento onde as compras serão listadas
 export const listaCompras = document.getElementById('listaCompras');
 // Verifica se o elemento existe antes de chamar a função

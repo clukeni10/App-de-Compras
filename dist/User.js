@@ -1,5 +1,5 @@
-import { saveDados } from "./DAO/UserDAO";
-import { IconChange } from "./Repository/ScriptRepository";
+import { saveDados } from "./DAO/UserDAO.js";
+import { IconChange } from "./Repository/ScriptRepository.js";
 // Tipagem dos elementos
 const btn = document.getElementById("btn");
 export const imageInput = document.getElementById("imageInput");
@@ -16,6 +16,9 @@ btn === null || btn === void 0 ? void 0 : btn.addEventListener("click", () => {
     const sucesso = saveDados();
     if (sucesso) {
         window.location.href = "produtos.html"; // Redireciona apenas se os dados forem salvos com sucesso
+    }
+    else {
+        alert("Erro, os dados não foram salvos!");
     }
 });
 // Verifica se o elemento existe antes de passar para a função

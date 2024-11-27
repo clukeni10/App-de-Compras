@@ -1,11 +1,11 @@
 
 
 export interface Produto {
-  id?: string;
+  id?: number | undefined;
   nome: string;
   preco: number;
 }
-
+ 
 
 export interface Compra {
   nome: string;
@@ -27,7 +27,7 @@ export interface CompraFinalizada {
 
 
 export interface ItemCarrinho {
-  id: number;
+  id: number | undefined;
   nome: string;
   preco: number;
 }

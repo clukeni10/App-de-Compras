@@ -1,6 +1,7 @@
 import { Produto, Registro, CompraFinalizada } from "../Interfaces";
 import { getNome, getValor } from "../User";
 
+
 export let Registros: Registro[] = JSON.parse(localStorage.getItem('Registros') || '[]');
 
 export let CarrinhosPorUsuario: Record<string, Produto[]> = JSON.parse(localStorage.getItem('CarrinhosPorUsuario') || '{}');
@@ -50,3 +51,4 @@ export function saveImage(imageBase64: string) {
     console.error("Falha ao salvar a imagem: Dados inválidos.");
   }
 }
+

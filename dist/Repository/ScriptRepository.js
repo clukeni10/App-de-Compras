@@ -1,5 +1,5 @@
-import { imageIcon } from "../User";
-import { saveImage } from "../DAO/UserDAO";
+import { imageIcon } from "../User.js";
+import { saveImage } from "../DAO/UserDAO.js";
 // Lidar com a seleção da imagem
 export function IconChange(imageInput) {
     imageInput.addEventListener("change", function () {

@@ -1,5 +1,5 @@
 // compras.ts
-import { ComprasFinalizadas, Registros } from '../DAO/UserDAO'; // Certifique-se de importar corretamente
+import { ComprasFinalizadas, Registros } from '../DAO/UserDAO.js'; // Certifique-se de importar corretamente
 export function atualizarLista(listaCompras) {
     listaCompras.innerHTML = ''; // Limpa a lista antes de atualizar
     // Exibe as compras de todos os usuários

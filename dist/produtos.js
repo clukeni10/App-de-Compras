@@ -5,7 +5,7 @@ document.querySelectorAll('.btnComprar').forEach(button => {
         const produto = this.closest('.product-card');
         if (produto) {
             // Obtém informações do produto
-            const productId = produto.getAttribute('data-id') || '';
+            const productId = parseInt(produto.getAttribute('data-id') || '');
             const productName = produto.getAttribute('data-nome') || '';
             const productPrice = parseFloat(produto.getAttribute('data-preco') || '0');
             // Recupera o registro do usuário atual

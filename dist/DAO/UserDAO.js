@@ -1,4 +1,4 @@
-import { getNome, getValor } from "../User";
+import { getNome, getValor } from "../User.js";
 export let Registros = JSON.parse(localStorage.getItem('Registros') || '[]');
 export let CarrinhosPorUsuario = JSON.parse(localStorage.getItem('CarrinhosPorUsuario') || '{}');
 export let ComprasFinalizadas = JSON.parse(localStorage.getItem('ComprasFinalizadas') || '[]');
