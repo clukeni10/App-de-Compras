@@ -1,5 +1,5 @@
 import { FinalizarCompraParams, Produto, ItemCarrinho, Registro, CarrinhosPorUsuario } from "../Interfaces";
-import { carrinho, ultimoRegistro, CarrinhosPorUsuario1, updateRegister, updateShopping, cleanCart, userCart, loadCart, loadRegister, saveShoppingCart } from "../DAO/CarrinhoDAO";
+import { carrinho, ultimoRegistro, CarrinhosPorUsuario1, updateRegister, updateShopping, cleanCart, userCart, loadCart, loadRegister, saveShoppingCart, getComprasFinalizadas } from "../DAO/CarrinhoDAO";
 import { itensContainer } from "../carrinho";
 import {GetBackEmptyCart, CreateItem} from "../View/CarrinhoView"
 
@@ -29,7 +29,7 @@ export function saveShopping(ultimoRegistro: {
   valor: number; nome: string
 }, carrinho: Produto[]): void {
   // Recupera o array de ComprasFinalizadas do localStorage ou usa um array vazio se não existir
-  const ComprasFinalizadas: Array<{ nome: string; produtos: Produto[] }> = JSON.parse(localStorage.getItem('ComprasFinalizadas') || '[]');
+  const ComprasFinalizadas = getComprasFinalizadas();
 
   // Adiciona a nova compra ao array
   ComprasFinalizadas.push({

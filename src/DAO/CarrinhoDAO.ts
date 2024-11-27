@@ -43,3 +43,7 @@ export function loadRegister(): Registro[]  {
 export function saveShoppingCart(ComprasFinalizadas: { nome: string; produtos: Produto[]; }[]): any {
     localStorage.setItem('ComprasFinalizadas', JSON.stringify(ComprasFinalizadas));
 }
+
+export function getComprasFinalizadas(): Array<{ nome: string; produtos: Produto[] }> {
+    return JSON.parse(localStorage.getItem('ComprasFinalizadas') || '[]');
+  }

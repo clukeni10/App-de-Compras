@@ -28,3 +28,6 @@ export function loadRegister() {
 export function saveShoppingCart(ComprasFinalizadas) {
     localStorage.setItem('ComprasFinalizadas', JSON.stringify(ComprasFinalizadas));
 }
+export function getComprasFinalizadas() {
+    return JSON.parse(localStorage.getItem('ComprasFinalizadas') || '[]');
+}
