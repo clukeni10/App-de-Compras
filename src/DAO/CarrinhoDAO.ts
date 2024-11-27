@@ -1,6 +1,4 @@
 import { CarrinhosPorUsuario, Produto, Registro} from "../Interfaces";
-import { ComprasFinalizadas } from "./UserDAO";
-
 
 // Recupera os registros do localStorage
 export let Registros1: Registro[] = JSON.parse(localStorage.getItem('Registros') || '[]');
@@ -12,7 +10,7 @@ export let carrinho: Produto[] = ultimoRegistro ? CarrinhosPorUsuario1[ultimoReg
  
 
 export function updateRegister(Registros1: any){
-    localStorage.setItem('Registros', JSON.stringify(Registros1));
+    localStorage.setItem('Registros', JSON.stringify(Registros1)); 
 };
 
 export function updateShopping(ComprasFinalizadas: any){
