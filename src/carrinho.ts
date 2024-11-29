@@ -1,6 +1,6 @@
 
 
-import { carrinho, ultimoRegistro } from './DAO/CarrinhoDAO';
+import { carrinho, ultimoUser } from './DAO/CarrinhoDAO';
 import { carregarCarrinho, removerItem, handleFinalizarCompra, finalizarCompra, saveShopping } from './Repository/CarrinhoRepository';
 
 
@@ -43,10 +43,10 @@ const btnFinalizarCompra = document.getElementById('finalizarCompra');
 if (btnFinalizarCompra) {
   btnFinalizarCompra.addEventListener('click', () =>{
     handleFinalizarCompra();
-    if (ultimoRegistro) {
-      saveShopping(ultimoRegistro, carrinho);
+    if (ultimoUser) {
+      saveShopping(ultimoUser, carrinho);
     } else {
-      console.error('ultimoRegistro is null');
+      console.error('ultimoUser is null');
     }
     });
   

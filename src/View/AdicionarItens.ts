@@ -2,14 +2,7 @@ import { Produto } from "../Interfaces";
 import { removerItem } from "../Repository/CarrinhoRepository";
 
 // Gera o HTML como string, sem manipular o DOM
-export function adicionarItem(produto: Produto, index: number): string {
-    return `
-        <div class="item">
-            <p>${produto.nome} - KZ ${produto.preco.toFixed(2)}</p>
-            <button class="remover" data-index="${index}">Remover</button>
-        </div>
-    `;
-}
+
 
 // Renderiza o HTML gerado no DOM
 export function renderizarItemNoDOM(html: string, container: HTMLElement, index: number): void {

@@ -37,8 +37,7 @@ imageInput.addEventListener("change", function () {
     reader.onload = function (e) {
       const imageBase64 = e.target.result;
 
-      // Salvar a imagem como base64 no localStorage
-      localStorage.setItem("imagem", imageBase64);
+     
 
       // Substituir o ícone pela imagem selecionada
       imageIcon.innerHTML = `<img src="${imageBase64}" alt="Imagem Selecionada" style="width: 100%; height: auto;"/>`;

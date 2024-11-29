@@ -13,12 +13,12 @@ export interface Compra {
 }
 
 
-export interface Registro {
+export interface Users {
   nome: string;
   valor: number;
   imagem?: string;
 }
-
+ 
 
 export interface CompraFinalizada {
   nome: string;
@@ -41,8 +41,8 @@ export interface CarrinhosPorUsuario {
 export interface FinalizarCompraParams {
   valorUser: number; // Saldo do usuário
   totalCarrinho: number; // Total do carrinho
-  ultimoRegistro: Registro; // Registro do usuário
-  Registros1: Registro[]; // Lista de registros
+  ultimoUser: Users; // User do usuário
+  Users1: Users[]; // Lista de Users
   CarrinhosPorUsuario1: CarrinhosPorUsuario; // Carrinhos por usuário
   carrinho: ItemCarrinho[]; // Itens do carrinho
 }

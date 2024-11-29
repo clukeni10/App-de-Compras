@@ -1,9 +1,9 @@
-import { imageIcon } from "../User";
+
 import { saveImage } from "../DAO/UserDAO";
 
 
 // Lidar com a seleção da imagem
-export function IconChange(imageInput: HTMLInputElement) {
+export function IconChange(imageInput: HTMLInputElement) { 
       imageInput.addEventListener("change", function () {
             const file = this.files?.[0];
 
@@ -18,12 +18,12 @@ export function IconChange(imageInput: HTMLInputElement) {
                         saveImage(imageBase64)
 
                         // Substituir o ícone pela imagem selecionada
-                        imageIcon.innerHTML = `<img src="${imageBase64}" alt="Imagem Selecionada" style="width: 100%; height: auto;"/>`;
+                        
                   }
 
 
                   reader.readAsDataURL(file); // Lê o arquivo como URL de dados (base64)
             }
       });
-};
+}; 
 

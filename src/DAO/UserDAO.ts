@@ -1,8 +1,9 @@
-import { Produto, Registro, CompraFinalizada } from "../Interfaces";
+import { Produto, Users, CompraFinalizada } from "../Interfaces";
 import { getNome, getValor } from "../User";
 
 
-export let Registros: Registro[] = JSON.parse(localStorage.getItem('Registros') || '[]');
+export let User: Users[] = JSON.parse(localStorage.getItem('Users') || '[]');
+
 
 export let CarrinhosPorUsuario: Record<string, Produto[]> = JSON.parse(localStorage.getItem('CarrinhosPorUsuario') || '{}');
 
@@ -17,21 +18,21 @@ export function saveDados(): boolean {
 
   if (nome && valor) {
 
-    let Registros: Registro[] = JSON.parse(
-      localStorage.getItem("Registros") || "[]"
+    let Users: Users[] = JSON.parse(
+      localStorage.getItem("Users") || "[]"
     );
 
 
     const imagem = localStorage.getItem("imagem");
 
 
-    Registros.push({
+    Users.push({
       nome: nome ?? "",
       valor: isNaN(valor) ? 0 : valor,
       imagem: imagem ?? ""
     });
 
-    localStorage.setItem("Registros", JSON.stringify(Registros));
+    localStorage.setItem("Users", JSON.stringify(Users));
     alert("Dados salvos com sucesso.");
 
 
@@ -52,3 +53,6 @@ export function saveImage(imageBase64: string) {
   }
 }
 
+export function updateRegister(Users1: any){
+  localStorage.setItem('Users', JSON.stringify(Users1)); 
+};

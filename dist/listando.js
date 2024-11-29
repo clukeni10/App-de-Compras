@@ -13,3 +13,4 @@ const backButton = document.getElementById('back');
 backButton === null || backButton === void 0 ? void 0 : backButton.addEventListener('click', () => {
     window.location.href = 'produtos.html';
 });
+

@@ -1,29 +1,30 @@
-import { carrinho, ultimoRegistro, CarrinhosPorUsuario1, updateRegister, updateShopping, cleanCart, userCart, loadCart, loadRegister, saveShoppingCart, getComprasFinalizadas } from "../DAO/CarrinhoDAO.js";
+import { carrinho, ultimoUser, CarrinhosPorUsuario1, updateShopping, cleanCart, UserCart, loadCart, loadRegister, saveShoppingCart, getComprasFinalizadas } from "../DAO/CarrinhoDAO.js";
 import { itensContainer } from "../carrinho.js";
-import { GetBackEmptyCart, CreateItem } from "../View/CarrinhoView.js";
-export function finalizarCompra({ valorUser, totalCarrinho, ultimoRegistro, Registros1, CarrinhosPorUsuario1, }) {
+import { GetBackEmptyCart, CreateItem, RemoveBtn } from "../View/CarrinhoView.js";
+import { updateRegister } from "../DAO/UserDAO.js";
+export function finalizarCompra({ valorUser, totalCarrinho, ultimoUser, Users1, CarrinhosPorUsuario1, }) {
     if (valorUser >= totalCarrinho) {
         // Atualiza o saldo do usuário
-        ultimoRegistro.valor = valorUser - totalCarrinho;
-        Registros1[Registros1.length - 1] = ultimoRegistro;
-        updateRegister(Registros1);
+        ultimoUser.valor = valorUser - totalCarrinho;
+        Users1[Users1.length - 1] = ultimoUser;
+        updateRegister(Users1);
     }
 }
-export function saveShopping(ultimoRegistro, carrinho) {
+export function saveShopping(ultimoUser, carrinho) {
     // Recupera o array de ComprasFinalizadas do localStorage ou usa um array vazio se não existir
     const ComprasFinalizadas = getComprasFinalizadas();
     // Adiciona a nova compra ao array
     ComprasFinalizadas.push({
-        nome: ultimoRegistro.nome,
+        nome: ultimoUser.nome,
         produtos: carrinho,
     });
     saveShoppingCart(ComprasFinalizadas);
     updateShopping(ComprasFinalizadas);
-    CarrinhosPorUsuario1[ultimoRegistro.nome] = [];
+    CarrinhosPorUsuario1[ultimoUser.nome] = [];
     cleanCart(CarrinhosPorUsuario1);
     const evento = new Event('dadosAtualizados');
     window.dispatchEvent(evento);
-    alert(`Compra realizada com sucesso! Seu novo saldo é de KZ ${ultimoRegistro === null || ultimoRegistro === void 0 ? void 0 : ultimoRegistro.valor.toFixed(2)}`);
+    alert(`Compra realizada com sucesso! Seu novo saldo é de KZ ${ultimoUser === null || ultimoUser === void 0 ? void 0 : ultimoUser.valor.toFixed(2)}`);
     // Atualiza a interface (deve ser definida globalmente ou passada como argumento)
     if (typeof window.carregarCarrinho === 'function') {
         window.carregarCarrinho();
@@ -47,14 +48,13 @@ export function carregarCarrinho() {
 export function adicionarItem(produto, index) {
     const item = CreateItem(produto, index);
     itensContainer.appendChild(item);
-    const removerBtn = item.querySelector('.remover');
-    removerBtn.addEventListener('click', () => removerItem(index));
+    RemoveBtn(item, index);
 }
 export function removerItem(index) {
     carrinho.splice(index, 1); // Remove o item do array
-    if (ultimoRegistro) {
-        CarrinhosPorUsuario1[ultimoRegistro.nome] = carrinho; // Atualiza o carrinho do usuário
-        userCart(CarrinhosPorUsuario1);
+    if (ultimoUser) {
+        CarrinhosPorUsuario1[ultimoUser.nome] = carrinho; // Atualiza o carrinho do usuário
+        UserCart(CarrinhosPorUsuario1);
     }
     carregarCarrinho(); // Atualiza a interface dinamicamente
 }
@@ -62,16 +62,16 @@ export function calcularTotalCarrinho(carrinho) {
     return carrinho.reduce((total, item) => total + item.preco, 0);
 }
 export function handleFinalizarCompra() {
-    // Carrega os registros e o último usuário
-    const Registros1 = loadRegister();
-    const ultimoRegistro = Registros1[Registros1.length - 1];
-    if (!ultimoRegistro) {
+    // Carrega os Users e o último usuário
+    const Users1 = loadRegister();
+    const ultimoUser = Users1[Users1.length - 1];
+    if (!ultimoUser) {
         alert('Nenhum usuário encontrado.');
         return;
     }
     // Carrega os carrinhos
     const CarrinhosPorUsuario1 = loadCart();
-    const carrinho = CarrinhosPorUsuario1[ultimoRegistro.nome] || [];
+    const carrinho = CarrinhosPorUsuario1[ultimoUser.nome] || [];
     if (carrinho.length === 0) {
         alert('O carrinho está vazio.');
         return;
@@ -79,13 +79,13 @@ export function handleFinalizarCompra() {
     // Calcula o total do carrinho
     const totalCarrinho = calcularTotalCarrinho(carrinho);
     // Obtém o saldo do usuário
-    const valorUser = ultimoRegistro.valor;
+    const valorUser = ultimoUser.valor;
     // Chama a função de finalização da compra
     finalizarCompra({
         valorUser,
         totalCarrinho,
-        ultimoRegistro,
-        Registros1,
+        ultimoUser,
+        Users1,
         CarrinhosPorUsuario1,
         carrinho,
     });
